@@ -12,6 +12,8 @@ body {
   color: #F8FAFC;
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Glassmorphism utility classes */
@@ -57,6 +59,51 @@ body {
   transform: rotateY(180deg);
 }
 
+/* Staggered entrance for cards / list items */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-enter {
+  animation: card-enter 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  opacity: 0;
+}
+
+/* Radial score ring animation */
+@keyframes score-ring-draw {
+  from { stroke-dashoffset: var(--ring-circ); }
+  to { stroke-dashoffset: var(--ring-target); }
+}
+
+/* Subtle floating glow animation */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Focus-visible outlines for keyboard accessibility */
+*:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 2px;
+}
+
 /* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
@@ -74,4 +121,18 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
+}
+
+/* Utility for responsive text truncation */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

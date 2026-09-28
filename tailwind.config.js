@@ -21,6 +21,7 @@ export default {
           cyan: '#06B6D4',
           emerald: '#10B981',
           coral: '#F43F5E',
+          rose: '#F43F5E',   // alias for coral
           amber: '#F59E0B',
         },
       },
