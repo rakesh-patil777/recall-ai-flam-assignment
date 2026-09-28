@@ -6,7 +6,12 @@
 
 An AI-powered study tool that transforms free-form notes, topics, and textbook excerpts into structured overviews, interactive 3D flashcards, and diagnostic quizzes — without conversational clutter.
 
-[Live Demo](#) · [Screen Recording](#screen-recording) · [Architecture](#architecture)
+[🚀 Live Demo](https://recall-ai-flam-assignment.vercel.app/) · [Screen Recording](#screen-recording) · [Architecture](#architecture)
+
+<br/>
+
+[![Vercel Deployment](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat-square&logo=vercel)](https://recall-ai-flam-assignment.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-recall--ai--flam--assignment.vercel.app-00df8f?style=flat-square&logo=google-chrome&logoColor=white)](https://recall-ai-flam-assignment.vercel.app/)
 
 </div>
 
@@ -51,8 +56,8 @@ The AI's output is treated as **structured application data**, validated through
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/recall-ai.git
-cd recall-ai
+git clone https://github.com/rakesh-patil777/recall-ai-flam-assignment.git
+cd recall-ai-flam-assignment
 
 # Install dependencies
 npm install
@@ -221,7 +226,11 @@ recall-ai/
 
 ## ✦ Deploying to Vercel
 
-RecallAI is fully configured for seamless 1-click deployment on **Vercel** with full-stack serverless execution (Vite React frontend + Express API backend).
+RecallAI is deployed and live on **Vercel**:
+
+> 🔗 **Live URL:** [https://recall-ai-flam-assignment.vercel.app/](https://recall-ai-flam-assignment.vercel.app/)
+
+The application runs full-stack on Vercel with serverless execution (Vite React frontend + Express API backend).
 
 ### Method 1: Deploy via Vercel Dashboard (Recommended)
 
