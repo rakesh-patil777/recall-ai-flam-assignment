@@ -219,6 +219,41 @@ recall-ai/
 
 ---
 
+## ✦ Deploying to Vercel
+
+RecallAI is fully configured for seamless 1-click deployment on **Vercel** with full-stack serverless execution (Vite React frontend + Express API backend).
+
+### Method 1: Deploy via Vercel Dashboard (Recommended)
+
+1. Push your latest code to GitHub:
+   ```bash
+   git add .
+   git commit -m "Configure Vercel full-stack deployment"
+   git push origin main
+   ```
+2. Go to [vercel.com/new](https://vercel.com/new).
+3. Import your GitHub repository (`recall-ai-flam-assignment`).
+4. Under **Environment Variables**, add:
+   - `GEMINI_API_KEY`: Your Gemini API key
+   - `GROQ_API_KEY`: *(Optional)* Your Groq API key
+   - `NODE_ENV`: `production`
+5. Click **Deploy**. Vercel will build the frontend into `dist/` and configure the Express serverless function at `/api/index.js` automatically.
+
+### Method 2: Deploy via Vercel CLI
+
+```bash
+# Log in to your Vercel account
+npx vercel login
+
+# Deploy preview
+npx vercel
+
+# Deploy directly to production
+npx vercel --prod
+```
+
+---
+
 ## ✦ Screen Recording
 
 > A short screen recording demonstrating the full user flow is available at:
