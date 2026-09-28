@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Sparkles, ChevronRight, Zap } from 'lucide-react';
+import { Sparkles, Zap } from 'lucide-react';
 
 const EXAMPLE_CHIPS = [
   'Binary Search & Off-by-one Traps',
@@ -34,21 +34,22 @@ export default function LandingScreen({ onGenerate, isLoading }) {
 
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16 flex flex-col items-center gap-10">
+
       {/* Hero */}
       <div className="text-center flex flex-col items-center gap-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-indigo/30 bg-brand-indigo/10 text-xs font-semibold tracking-wide text-brand-indigo uppercase">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-blue-mid/40 bg-brand-blue text-xs font-semibold tracking-wide text-brand-blue-dark uppercase">
           <Sparkles className="w-3.5 h-3.5" />
           AI-Powered Study Workspace
         </div>
 
-        <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight max-w-2xl">
+        <h1 className="text-4xl sm:text-5xl font-bold text-brand-text leading-tight tracking-tight max-w-2xl">
           Turn raw knowledge into{' '}
-          <span className="bg-gradient-to-r from-brand-indigo to-brand-violet bg-clip-text text-transparent">
+          <span className="text-brand-blue-dark">
             permanent memory.
           </span>
         </h1>
 
-        <p className="text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed">
+        <p className="text-brand-muted text-base sm:text-lg max-w-xl leading-relaxed">
           Paste complex study notes, interview prep topics, or textbook excerpts.
           RecallAI transforms them into structured overviews, tactile flashcards, and diagnostic quizzes.
         </p>
@@ -56,7 +57,7 @@ export default function LandingScreen({ onGenerate, isLoading }) {
 
       {/* Input card */}
       <form onSubmit={handleSubmit} className="w-full">
-        <div className="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-4 border border-brand-indigo/20 shadow-card-stage">
+        <div className="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-4">
           <textarea
             ref={textareaRef}
             value={input}
@@ -64,19 +65,19 @@ export default function LandingScreen({ onGenerate, isLoading }) {
             onKeyDown={handleKeyDown}
             rows={5}
             placeholder="e.g. Teach me Binary Search for senior software engineering interviews. Cover essential concepts, time/space complexity, boundary condition traps, and tricky practice questions..."
-            className="w-full resize-none bg-transparent text-slate-200 placeholder-slate-600 text-sm sm:text-base leading-relaxed outline-none font-medium"
+            className="w-full resize-none bg-transparent text-brand-text placeholder-brand-faint text-sm sm:text-base leading-relaxed outline-none font-medium"
             aria-label="Study topic or notes"
             disabled={isLoading}
           />
 
           {/* Toolbar */}
-          <div className="flex items-center justify-between flex-wrap gap-3 border-t border-white/[0.06] pt-4">
-            <div className="flex items-center gap-3 flex-wrap text-xs text-slate-500 font-mono">
-              <span className={input.length > MAX_CHARS * 0.9 ? 'text-brand-amber' : ''}>
+          <div className="flex items-center justify-between flex-wrap gap-3 border-t border-surface-border pt-4">
+            <div className="flex items-center gap-3 flex-wrap text-xs text-brand-faint font-mono">
+              <span className={input.length > MAX_CHARS * 0.9 ? 'text-amber-600 font-semibold' : ''}>
                 {input.length.toLocaleString()} / {MAX_CHARS.toLocaleString()}
               </span>
               {input.length > 10 && (
-                <span className="px-2 py-0.5 rounded-full bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 font-sans font-medium text-[11px] not-italic">
+                <span className="px-2 py-0.5 rounded-full bg-brand-blue border border-brand-blue-mid/30 text-brand-blue-dark font-sans font-medium text-[11px] not-italic">
                   ~{Math.max(5, Math.round(input.length / 400))} min study time
                 </span>
               )}
@@ -86,16 +87,15 @@ export default function LandingScreen({ onGenerate, isLoading }) {
               disabled={input.trim().length < 2 || isLoading}
               className="
                 flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white
-                bg-gradient-to-r from-brand-indigo to-brand-violet
-                shadow-glow-primary
-                hover:from-indigo-500 hover:to-violet-500
+                bg-brand-blue-dark shadow-btn-primary
+                hover:bg-blue-700
                 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
                 transition-all duration-150
               "
             >
               <Zap className="w-4 h-4" />
               Generate Study Set
-              <span className="hidden sm:inline text-[10px] font-mono opacity-60 border border-white/20 rounded px-1 py-0.5 ml-1">
+              <span className="hidden sm:inline text-[10px] font-mono opacity-70 border border-white/25 rounded px-1 py-0.5 ml-1">
                 ⌘↵
               </span>
             </button>
@@ -105,7 +105,7 @@ export default function LandingScreen({ onGenerate, isLoading }) {
 
       {/* Inspiration chips */}
       <div className="w-full flex flex-col items-center gap-3">
-        <p className="text-xs text-slate-600 font-medium uppercase tracking-widest">Try a popular template</p>
+        <p className="text-xs text-brand-faint font-medium uppercase tracking-widest">Try a popular template</p>
         <div className="flex flex-wrap justify-center gap-2">
           {EXAMPLE_CHIPS.map((chip) => (
             <button
@@ -113,8 +113,8 @@ export default function LandingScreen({ onGenerate, isLoading }) {
               onClick={() => handleChip(chip)}
               disabled={isLoading}
               className="
-                px-3 py-1.5 rounded-full text-xs font-medium text-slate-400 border border-white/[0.08]
-                bg-white/[0.03] hover:border-brand-indigo/30 hover:text-slate-200 hover:bg-brand-indigo/10
+                px-3 py-1.5 rounded-full text-xs font-medium text-brand-muted border border-surface-border
+                bg-white hover:border-brand-blue-mid/50 hover:text-brand-blue-dark hover:bg-brand-blue
                 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed
               "
             >
@@ -128,25 +128,28 @@ export default function LandingScreen({ onGenerate, isLoading }) {
       <div className="w-full grid sm:grid-cols-3 gap-4 mt-2">
         {[
           {
-            icon: '📋',
+            emoji: '📋',
             title: 'Structured Overview',
             desc: 'Key concepts, traps & complexity breakdown — no conversational fluff.',
+            bg: 'bg-brand-blue',
           },
           {
-            icon: '🃏',
+            emoji: '🃏',
             title: 'Interactive Flashcards',
             desc: '3D flip cards with keyboard navigation and mastery tracking.',
+            bg: 'bg-white',
           },
           {
-            icon: '🎯',
+            emoji: '🎯',
             title: 'Adaptive Quiz & Review',
             desc: 'Instant validation, explanations, and targeted weak-area retry.',
+            bg: 'bg-brand-peach',
           },
         ].map((item) => (
-          <div key={item.title} className="glass-card rounded-2xl p-5 flex flex-col gap-3">
-            <div className="text-2xl">{item.icon}</div>
-            <p className="text-sm font-semibold text-slate-200">{item.title}</p>
-            <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+          <div key={item.title} className={`${item.bg} rounded-2xl p-5 flex flex-col gap-3 border border-surface-border shadow-card`}>
+            <div className="text-2xl">{item.emoji}</div>
+            <p className="text-sm font-semibold text-brand-text">{item.title}</p>
+            <p className="text-xs text-brand-muted leading-relaxed">{item.desc}</p>
           </div>
         ))}
       </div>

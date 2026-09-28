@@ -4,14 +4,14 @@ import { ChevronLeft, ChevronRight, RotateCcw, Target } from 'lucide-react';
 export default function FlashcardScreen({
   flashcards, cardIndex, cardRevealed, onReveal, onNext, onPrev, onFlip, onQuiz, onOverview,
 }) {
-  const total = flashcards?.length ?? 0;
-  const card = flashcards?.[cardIndex];
+  const total    = flashcards?.length ?? 0;
+  const card     = flashcards?.[cardIndex];
   const progress = total ? ((cardIndex + 1) / total) * 100 : 0;
 
   // Keyboard navigation
   const handleKey = useCallback((e) => {
     if (e.key === 'ArrowRight' || e.key === 'l') onNext();
-    if (e.key === 'ArrowLeft' || e.key === 'h') onPrev();
+    if (e.key === 'ArrowLeft'  || e.key === 'h') onPrev();
     if (e.key === ' ' || e.key === 'f') { e.preventDefault(); onFlip(); }
   }, [onNext, onPrev, onFlip]);
 
@@ -24,14 +24,15 @@ export default function FlashcardScreen({
 
   return (
     <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-6">
+
       {/* Progress */}
-      <div className="flex items-center justify-between text-xs text-slate-500">
-        <span>Card <span className="text-slate-300 font-semibold">{cardIndex + 1}</span> of {total}</span>
+      <div className="flex items-center justify-between text-xs text-brand-muted">
+        <span>Card <span className="text-brand-text font-semibold">{cardIndex + 1}</span> of {total}</span>
         <span className="font-mono">{Math.round(progress)}% complete</span>
       </div>
-      <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+      <div className="h-1.5 rounded-full bg-surface-border overflow-hidden">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-indigo to-brand-violet transition-all duration-400 ease-out"
+          className="h-full rounded-full bg-brand-blue-dark transition-all duration-400 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -56,22 +57,24 @@ export default function FlashcardScreen({
         >
           {/* Front — question */}
           <div
-            className="absolute inset-0 glass-panel rounded-3xl p-8 flex flex-col justify-between border border-white/[0.08]"
+            className="absolute inset-0 glass-panel rounded-3xl p-8 flex flex-col justify-between"
             style={{ backfaceVisibility: 'hidden' }}
           >
-            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-indigo">
-              <span className="w-2 h-2 rounded-full bg-brand-indigo" />
+            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-blue-dark">
+              <span className="w-2 h-2 rounded-full bg-brand-blue-dark" />
               Question
             </div>
-            <p className="text-xl sm:text-2xl font-semibold text-white leading-snug text-center py-4">
+            <p className="text-xl sm:text-2xl font-semibold text-brand-text leading-snug text-center py-4">
               {card.front}
             </p>
-            <p className="text-xs text-slate-600 text-center">Click or press <kbd className="border border-white/10 rounded px-1 py-0.5 font-mono">Space</kbd> to reveal</p>
+            <p className="text-xs text-brand-faint text-center">
+              Click or press <kbd className="border border-surface-border rounded px-1 py-0.5 font-mono bg-surface-2">Space</kbd> to reveal
+            </p>
           </div>
 
           {/* Back — answer */}
           <div
-            className="absolute inset-0 glass-panel rounded-3xl p-8 flex flex-col justify-between border border-brand-indigo/20 bg-gradient-to-b from-brand-indigo/5 to-transparent"
+            className="absolute inset-0 rounded-3xl p-8 flex flex-col justify-between border border-brand-blue-mid/40 bg-brand-blue"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-emerald">
@@ -79,12 +82,12 @@ export default function FlashcardScreen({
               Answer
             </div>
             <div className="flex-1 flex items-center justify-center py-4">
-              <p className="text-base sm:text-lg text-slate-200 leading-relaxed text-center">
+              <p className="text-base sm:text-lg text-brand-text leading-relaxed text-center">
                 {card.back}
               </p>
             </div>
             {card.hint && (
-              <p className="text-[11px] text-slate-500 text-center border-t border-white/[0.06] pt-3 italic">
+              <p className="text-[11px] text-brand-muted text-center border-t border-brand-blue-mid/30 pt-3 italic">
                 💡 {card.hint}
               </p>
             )}
@@ -98,14 +101,14 @@ export default function FlashcardScreen({
           onClick={onPrev}
           disabled={cardIndex === 0}
           id="flashcard-prev-btn"
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/[0.08] text-slate-400 hover:text-white hover:border-white/20 disabled:opacity-25 disabled:cursor-not-allowed transition-all text-sm font-medium"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-surface-border bg-white text-brand-muted hover:text-brand-text hover:border-brand-blue-mid/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm font-medium shadow-card"
         >
           <ChevronLeft className="w-4 h-4" /> Previous
         </button>
 
         <button
           onClick={onFlip}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-brand-indigo/30 text-brand-indigo hover:bg-brand-indigo/10 transition-all text-sm font-medium"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-brand-blue-mid/40 bg-brand-blue text-brand-blue-dark hover:bg-blue-100 transition-all text-sm font-medium"
         >
           <RotateCcw className="w-3.5 h-3.5" /> Flip
         </button>
@@ -114,7 +117,7 @@ export default function FlashcardScreen({
           <button
             onClick={onNext}
             id="flashcard-next-btn"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-indigo to-brand-violet text-white shadow-glow-primary hover:from-indigo-500 hover:to-violet-500 transition-all text-sm font-semibold"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-blue-dark text-white shadow-btn-primary hover:bg-blue-700 transition-all text-sm font-semibold"
           >
             Next <ChevronRight className="w-4 h-4" />
           </button>
@@ -122,7 +125,7 @@ export default function FlashcardScreen({
           <button
             onClick={onQuiz}
             id="flashcards-to-quiz-btn"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-violet to-brand-indigo text-white shadow-glow-primary hover:opacity-90 transition-all text-sm font-semibold"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-blue-dark text-white shadow-btn-primary hover:bg-blue-700 transition-all text-sm font-semibold"
           >
             <Target className="w-4 h-4" /> Take Quiz
           </button>
@@ -130,12 +133,12 @@ export default function FlashcardScreen({
       </div>
 
       {/* Keyboard hint */}
-      <p className="text-center text-[11px] text-slate-600">
-        <kbd className="border border-white/10 rounded px-1 font-mono">←</kbd>
+      <p className="text-center text-[11px] text-brand-faint">
+        <kbd className="border border-surface-border rounded px-1 font-mono bg-surface-2">←</kbd>
         {' / '}
-        <kbd className="border border-white/10 rounded px-1 font-mono">→</kbd>
+        <kbd className="border border-surface-border rounded px-1 font-mono bg-surface-2">→</kbd>
         {' navigate · '}
-        <kbd className="border border-white/10 rounded px-1 font-mono">Space</kbd>
+        <kbd className="border border-surface-border rounded px-1 font-mono bg-surface-2">Space</kbd>
         {' flip'}
       </p>
     </main>

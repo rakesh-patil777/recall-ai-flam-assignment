@@ -62,8 +62,8 @@ export default function App() {
                   className={`
                     px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150
                     ${view === v
-                      ? 'bg-brand-indigo/20 text-brand-indigo border border-brand-indigo/30'
-                      : 'text-slate-500 hover:text-slate-300 hover:bg-white/[0.05]'
+                      ? 'bg-brand-blue text-brand-blue-dark border border-brand-blue-mid/40'
+                      : 'text-brand-muted hover:text-brand-text hover:bg-surface-2'
                     }
                   `}
                 >

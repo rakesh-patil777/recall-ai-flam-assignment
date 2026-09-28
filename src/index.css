@@ -2,46 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Root ────────────────────────────────────────────────────────────────── */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+}
+
+html {
+  background-color: #FBFAF7;
 }
 
 body {
   margin: 0;
-  background-color: #0B0F19;
-  color: #F8FAFC;
+  background-color: #FBFAF7;
+  color: #253449;
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glassmorphism utility classes */
+/* ── Card / Panel System ─────────────────────────────────────────────────── */
+
+/* Primary content panel — white card with soft shadow */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E6E8EC;
+  box-shadow: 0 1px 3px rgba(37, 52, 73, 0.08), 0 1px 2px rgba(37, 52, 73, 0.05);
 }
 
+/* Secondary tinted card — Powder Blue wash */
 .glass-card {
-  background: rgba(30, 41, 59, 0.70);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F7F9FD;
+  border: 1px solid #E6E8EC;
+  box-shadow: 0 1px 2px rgba(37, 52, 73, 0.05);
 }
 
+/* Input surface */
 .glass-input {
-  background: rgba(11, 15, 25, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #FFFFFF;
+  border: 1.5px solid #E6E8EC;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .glass-input:focus {
-  border-color: rgba(99, 102, 241, 0.6);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  border-color: #90BEF0;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.20);
+  outline: none;
 }
 
-/* 3D Flashcard Flip utilities */
+/* ── Peach accent panel ──────────────────────────────────────────────────── */
+.peach-panel {
+  background: #FBE3D5;
+  border: 1px solid #F4C9B3;
+}
+
+/* ── Blue accent panel ───────────────────────────────────────────────────── */
+.blue-panel {
+  background: #DCEBFA;
+  border: 1px solid #B8D8F7;
+}
+
+/* ── 3D Flashcard Flip utilities ─────────────────────────────────────────── */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -59,11 +80,11 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Staggered entrance for cards / list items */
+/* ── Staggered entrance animation ────────────────────────────────────────── */
 @keyframes card-enter {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.98);
+    transform: translateY(10px) scale(0.99);
   }
   to {
     opacity: 1;
@@ -72,63 +93,57 @@ body {
 }
 
 .animate-card-enter {
-  animation: card-enter 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation: card-enter 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   opacity: 0;
 }
 
-/* Radial score ring animation */
-@keyframes score-ring-draw {
-  from { stroke-dashoffset: var(--ring-circ); }
-  to { stroke-dashoffset: var(--ring-target); }
-}
-
-/* Subtle floating glow animation */
+/* ── Subtle ambient pulse (kept minimal — no neon) ───────────────────────── */
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+  0%, 100% { opacity: 0.20; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(1.04); }
 }
 
 .animate-glow-pulse {
-  animation: glow-pulse 4s ease-in-out infinite;
+  animation: glow-pulse 5s ease-in-out infinite;
 }
 
-/* Focus-visible outlines for keyboard accessibility */
+/* ── Focus-visible for keyboard accessibility ────────────────────────────── */
 *:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline: 2px solid #90BEF0;
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 button:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline: 2px solid #90BEF0;
   outline-offset: 2px;
 }
 
-/* Custom scrollbars */
+/* ── Custom scrollbars (light theme) ─────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0F19;
+  background: #F4F3F0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #C8D4E0;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #A0B4C8;
 }
 
-/* Utility for responsive text truncation */
+/* ── Text balance ────────────────────────────────────────────────────────── */
 .text-balance {
   text-wrap: balance;
 }
 
-/* Reduced motion preference */
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
